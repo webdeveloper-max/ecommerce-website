@@ -21,18 +21,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter your password!"],
     minlength: [8, "Password should be greater than 8 characters"],
-    select: false,
+    
   },
   avatar: {
     public_id: {
       type: String,
-      required: true,
+      required:false,
     },
     url: {
       type: String,
-      required: true,
+      required: false,
     },
-  },
+ },
   role: {
     type: String,
     default: "user",
@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
   },
   resetPasswordToken: String,
   resetPasswordTime: Date,
-});
+ });
 
 // Hash password
 userSchema.pre("save", async function (next) {

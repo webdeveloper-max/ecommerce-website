@@ -2,34 +2,33 @@ const User = require("../models/UserModel");
 const ErrorHandler = require("../utils/ErrorHandler.js");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken.js");
-const cloudinary = require("cloudinary");
+//const cloudinary = require("cloudinary");
 
 // Register user
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
   try {
-    const { name, email, password, avatar } = req.body;
+    const { name, email, password } = req.body;
 
     let user = await User.findOne({ email });
-    if (user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User already exists" });
+     if (user) {
+       return res
+         .status(400)
+       .json({ success: false, message: "User already exists" });
     }
 
-    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-      folder: "avatars",
-    });
+    
 
     user = await User.create({
       name,
       email,
       password,
-      avatar: { public_id: myCloud.public_id, url: myCloud.secure_url },
+     
     });
     
     sendToken(user, 201, res);
 
-  } catch (error) {
+  } 
+  catch (error) {
     res.status(500).json({
       success: false,
       message: error.message,
@@ -98,7 +97,7 @@ exports.userDetails = catchAsyncErrors(async (req, res, next) => {
      });
  });
 
- // Get Single User Details ---Admin
+ 
  exports.getSingleUser = catchAsyncErrors(async (req,res,next) =>{
      const user = await User.findById(req.params.id);
    
@@ -114,7 +113,7 @@ exports.userDetails = catchAsyncErrors(async (req, res, next) => {
 
 
 
-// // Delete User ---Admin
+
  exports.deleteUser = catchAsyncErrors(async(req,res,next) =>{
   
     const user = await User.findById(req.params.id);
