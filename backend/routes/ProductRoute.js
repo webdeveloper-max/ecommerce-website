@@ -1,21 +1,4 @@
 const express = require("express");
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
-// const sharp = require('sharp')
- 
-// const upload = multer({
-//     limits: {
-//         fileSize: 1000000
-//     },
-//     fileFilter(req, file, cb) {
-//         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-//             return cb(new Error('Please upload a valid image file'))
-//         }
-//         cb(undefined, true)
-//     }
-// })
-
-
 const {
   getAllProducts,
   createProduct,
@@ -37,8 +20,7 @@ router
   .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminProducts);
 
 router
-  .route("/product/new", upload.single('avatar'))
-  
+  .route("/product/new")
   .post(isAuthenticatedUser, authorizeRoles("admin"), createProduct);
 
 router
