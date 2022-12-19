@@ -5,21 +5,21 @@ const productSchema = new mongoose.Schema({
         type:String,
         required:[true, "Please enter a name of a product"],
         trim: true,
-        //maxLength:[20, "Product name not exceed than 20 characters"]
+        maxLength:[20, "Product name not exceed than 20 characters"]
     },
     description:{
         type:String,
         required:[true, "Please add a description of your product"],
-        //maxlength:[4000,"Description is can not exceed than 4000 characters"]
+        maxlength:[4000,"Description is can not exceed than 4000 characters"]
     },
     price:{
         type:Number,
         required: [true, "Please add a price for your product"],
-        //maxLength:[8, "Price can not exceed than 8 characters"],
+        maxLength:[8, "Price can not exceed than 8 characters"],
     },
-    discountPrice:{
-        type:String
-        //maxLength: [4, "Discount price can not exceed than 4 characters"],
+    offerPrice:{
+        type:String,
+        maxLength: [4, "Discount price can not exceed than 4 characters"],
     },
     color:{
         type: String,
@@ -34,12 +34,12 @@ const productSchema = new mongoose.Schema({
     images:[
         {
             public_id:{
-                type:String
-                // required:true,
+                type:String,
+                required:true,
             },
             url:{
                 type:String,
-                // required:true,
+                required:true,
             },
         }
     ],
@@ -50,7 +50,7 @@ const productSchema = new mongoose.Schema({
     Stock:{
         type: Number,
         required:[true,"Please add some stoke for your product"],
-        //maxLength: [3, "Stock can not exceed than 3 characters"],
+        maxLength: [3, "Stock can not exceed than 3 characters"],
     },
   numOfReviews:{
       type: Number,

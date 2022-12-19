@@ -2,9 +2,9 @@ const User = require("../models/UserModel");
 const ErrorHandler = require("../utils/ErrorHandler.js");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken.js");
-//const cloudinary = require("cloudinary");
 
-// Register user
+
+
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
@@ -37,7 +37,7 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-// // Login User
+
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
    const { email, password } = req.body;
 
@@ -63,7 +63,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
    sendToken(user, 201,res)
  });
 
- //  Log out user
+ 
 exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
     res.cookie("token", null, {    
     expires: new Date(Date.now()),
@@ -76,7 +76,7 @@ exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
    });
  });
 
-// //  Get user Details
+
 exports.userDetails = catchAsyncErrors(async (req, res, next) => {
    const user = await User.findById(req.user.id);
 
@@ -88,7 +88,7 @@ exports.userDetails = catchAsyncErrors(async (req, res, next) => {
 
 
 
- // Get All users ---Admin
+
  exports.getAllUsers = catchAsyncErrors(async (req,res,next) =>{
      const users = await User.find();
 
@@ -119,9 +119,9 @@ exports.userDetails = catchAsyncErrors(async (req, res, next) => {
   
     const user = await User.findById(req.params.id);
 
-    const imageId = user.avatar.public_id;
+   
 
-    await cloudinary.v2.uploader.destroy(imageId);
+    
 
      if(!user){
          return next(new ErrorHandler("User is not found with this id",400));

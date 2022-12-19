@@ -21,7 +21,7 @@ class Features {
     filter(){
         const queryCopy = { ...this.queryStr };
 
-        // Removing some field for category
+        
         const removeFields = ["keyword","page","limit"];
 
         removeFields.forEach((key) => delete queryCopy[key]);

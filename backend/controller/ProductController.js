@@ -4,7 +4,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Features = require("../utils/Features");
 const cloudinary = require("cloudinary");
 
-// create Product --Admin
+
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   let images = [];
 
@@ -38,7 +38,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Product (Admin)
+
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
 
@@ -48,7 +48,7 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// get All Products
+
 exports.getAllProducts = catchAsyncErrors(async (req, res) => {
   const resultPerPage = 8;
 
@@ -67,7 +67,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
   });
 });
 
-// Update Product ---Admin
+
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   if (!product) {
@@ -83,7 +83,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   }
 
   if (images !== undefined) {
-    // Delete image from cloudinary
+    
     for (let i = 0; i < product.images.length; i++) {
       await cloudinary.v2.uploader.destroy(product.images[i].public_id);
     }
@@ -113,7 +113,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// delete Product
+
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
@@ -121,7 +121,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Product is not found with this id", 404));
   }
 
-  // Deleting images from cloudinary
+  
   for (let i = 0; 1 < product.images.length; i++) {
     const result = await cloudinary.v2.uploader.destroy(
       product.images[i].public_id
@@ -136,7 +136,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// single Product details
+
 exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
   if (!product) {
@@ -148,7 +148,7 @@ exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Create New Review or Update the review
+
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
 
@@ -190,7 +190,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All reviews of a single product
+
 exports.getSingleProductReviews = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.id);
 
@@ -204,7 +204,7 @@ exports.getSingleProductReviews = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Delete Review --Admin
+
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 

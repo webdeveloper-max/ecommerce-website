@@ -3,7 +3,7 @@ const Wishlist = require("../models/WishListModel");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 
-// Add to wishlist
+
 exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
   const {
     productName,
@@ -30,7 +30,6 @@ exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// get wishlistData Data
 exports.getWishlistData = catchAsyncErrors(async (req, res, next) => {
   const wishlistData = await Wishlist.find({ userId: req.user.id });
 
@@ -40,7 +39,7 @@ exports.getWishlistData = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// remove wishlistData
+
 exports.removeWishlistData = catchAsyncErrors(async (req, res, next) => {
   const wishlistData = await Wishlist.findById(req.params.id);
 
@@ -56,7 +55,7 @@ exports.removeWishlistData = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// add To Cart
+
 exports.addToCart = catchAsyncErrors(async (req, res, next) => {
   const {
     productName,
@@ -83,7 +82,7 @@ exports.addToCart = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// update Cart
+
 exports.updateCart = catchAsyncErrors(async (req, res, next) => {
   const {
     quantity,
@@ -99,7 +98,7 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// get Cart Data
+
 exports.getCartData = catchAsyncErrors(async (req, res, next) => {
   const cartData = await Cart.find({ userId: req.user.id });
   res.status(200).json({
@@ -108,7 +107,7 @@ exports.getCartData = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// remove Cart Data
+
 exports.removeCartData = catchAsyncErrors(async (req, res, next) => {
   const cartData = await Cart.findById(req.params.id);
 
